@@ -24,6 +24,22 @@ var fieldDept   = document.getElementById("fieldDept");
 var fieldSalary = document.getElementById("fieldSalary");
 var fieldStatus = document.getElementById("fieldStatus");
 
+
+function exportCSV() {
+  var headers = ["ID", "Name", "Email", "Department", "Salary", "Status"];
+  var rows = employees.map(function (emp) {
+    return [emp.id, emp.name, emp.email, emp.department, emp.salary, emp.status].join(",");
+  });
+  var csv = [headers.join(",")].concat(rows).join("\n");
+  var blob = new Blob([csv], { type: "text/csv" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = "employees.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 function renderTable() {
   var query = searchInput.value;
   var dept  = deptFilter.value;
@@ -182,6 +198,9 @@ confirmModal.addEventListener("click", function (e) {
     confirmModal.style.display = "none";
   }
 });
+
+
+document.getElementById("exportBtn").addEventListener("click", exportCSV);
 
 empForm.addEventListener("submit", function (e) {
   e.preventDefault();
