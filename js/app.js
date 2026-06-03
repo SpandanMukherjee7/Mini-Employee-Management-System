@@ -202,6 +202,8 @@ confirmModal.addEventListener("click", function (e) {
 
 document.getElementById("exportBtn").addEventListener("click", exportCSV);
 
+
+
 empForm.addEventListener("submit", function (e) {
   e.preventDefault();
 

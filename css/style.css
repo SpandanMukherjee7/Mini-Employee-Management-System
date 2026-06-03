@@ -128,8 +128,10 @@ thead th {
   text-align: left;
 }
 
-tbody th:hover {
-  background-color: #ed2a03e9;
+tbody td:hover {
+  
+  transform: translateY(-2px);
+
 }
 
 
