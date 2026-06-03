@@ -90,3 +90,27 @@ function getStats() {
   var totalSalary = employees.reduce(function (sum, emp) { return sum + emp.salary; }, 0);
   return { total, active, inactive, totalSalary };
 }
+
+function getInsights() {
+  var total = employees.length;
+
+  var totalSalary = employees.reduce(function (sum, emp) { return sum + emp.salary; }, 0);
+  var avgSalary = total > 0 ? Math.round(totalSalary / total) : 0;
+
+  var deptCount = {};
+  employees.forEach(function (emp) {
+    deptCount[emp.department] = (deptCount[emp.department] || 0) + 1;
+  });
+  var largestDept = total > 0 ? Object.keys(deptCount).reduce(function (a, b) {
+    return deptCount[a] > deptCount[b] ? a : b;
+  }) : "N/A";
+
+  var latest = total > 0 ? employees.reduce(function (prev, curr) {
+    return curr.id > prev.id ? curr : prev;
+  }).name : "N/A";
+
+  var activeCount = employees.filter(function (emp) { return emp.status === "Active"; }).length;
+  var activeRate = total > 0 ? Math.round((activeCount / total) * 100) : 0;
+
+  return { avgSalary, largestDept, latest, activeRate };
+}

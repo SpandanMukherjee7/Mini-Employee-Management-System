@@ -128,12 +128,17 @@ thead th {
   text-align: left;
 }
 
+tbody th:hover {
+  background-color: #ed2a03e9;
+}
+
+
 tbody tr {
   border-bottom: 1px solid #eee;
 }
 
 tbody tr:hover {
-  background-color: #f9f9f9;
+  background-color: #77ac80;
 }
 
 tbody td {
@@ -380,3 +385,103 @@ body.dark .btn-cancel {
 body.dark footer {
   color: #555;
 }
+
+
+#pagination {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  min-width: 36px;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #2c3e50;
+  color: white;
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-active {
+  background: #2c3e50;
+  color: white;
+  border-color: #2c3e50;
+}
+
+/* dark mode */
+body.dark .page-btn {
+  background: #16213e;
+  color: #e0e0e0;
+  border-color: #2a2a4a;
+}
+
+body.dark .page-active {
+  background: #0f3460;
+  border-color: #0f3460;
+}
+
+
+/* INSIGHTS */
+.insights {
+  margin-top: 24px;
+}
+
+.insights-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 12px;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.insight-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border-left: 4px solid #2c3e50;
+}
+
+.insight-label {
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.insight-value {
+  font-size: 22px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* dark mode */
+body.dark .insights-title {
+  color: #e0e0e0;
+}
+body.dark .insight-card {
+  background: #16213e;
+  border-left-color: #0f3460;
+}
+body.dark .insight-value {
+  color: #e0e0e0;
+}
+
+/* responsive */
