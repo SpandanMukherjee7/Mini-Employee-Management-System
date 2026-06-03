@@ -40,6 +40,7 @@ function addEmployee(name, email, department, salary, status) {
     salary: Number(salary),
     status: status
   };
+  console.log(nextId);
   nextId++;
   employees.push(newEmp);
   saveOneEmployee(newEmp);
