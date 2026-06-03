@@ -77,6 +77,28 @@
     <div id="pagination" style="margin-top: 16px;"></div>
   </main>
 
+  <section class="insights">
+    <h2 class="insights-title">Quick Insights</h2>
+    <div class="insights-grid">
+      <div class="insight-card">
+        <p class="insight-label">Avg. Monthly Salary</p>
+        <p class="insight-value" id="insightAvgSalary">₹0</p>
+      </div>
+      <div class="insight-card">
+        <p class="insight-label">Largest Department</p>
+        <p class="insight-value" id="insightLargestDept">N/A</p>
+      </div>
+      <div class="insight-card">
+        <p class="insight-label">Latest Employee</p>
+        <p class="insight-value" id="insightLatest">N/A</p>
+      </div>
+      <div class="insight-card">
+        <p class="insight-label">Active Rate</p>
+        <p class="insight-value" id="insightActiveRate">0%</p>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <p>&copy; 2025 Employee Management System</p>
@@ -132,7 +154,6 @@
     <!-- CONFIRM DELETE MODAL -->
     <div class="modal-overlay" id="confirmModal">
     <div class="modal-box" style="max-width: 380px; text-align: center;">
-        <div style="font-size: 40px; margin-bottom: 12px;">⚠️</div>
         <h2 style="margin-bottom: 8px; color: #e74c3c;">Delete Employee</h2>
         <p id="confirmText" style="color: #666; margin-bottom: 24px; font-size: 14px;"></p>
         <div class="form-actions" style="justify-content: center;">

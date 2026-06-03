@@ -152,6 +152,14 @@ function handleDelete(id) {
   confirmModal.style.display = "flex";
 }
 
+function renderInsights() {
+  var data = getInsights();
+  document.getElementById("insightAvgSalary").textContent  = "₹" + data.avgSalary.toLocaleString();
+  document.getElementById("insightLargestDept").textContent = data.largestDept;
+  document.getElementById("insightLatest").textContent     = data.latest;
+  document.getElementById("insightActiveRate").textContent  = data.activeRate + "%";
+}
+
 confirmOk.addEventListener("click", function () {
   if (deleteTargetId !== null) {
     deleteEmployee(deleteTargetId);
@@ -159,6 +167,7 @@ confirmOk.addEventListener("click", function () {
     confirmModal.style.display = "none";
     renderTable();
     renderStats();
+    renderInsights(); 
   }
 });
 
@@ -195,6 +204,7 @@ empForm.addEventListener("submit", function (e) {
   closeModal();
   renderTable();
   renderStats();
+  renderInsights(); 
 });
 
 searchInput.addEventListener("input", function () {
@@ -228,3 +238,4 @@ document.getElementById("darkToggle").addEventListener("click", function () {
 
 renderTable();
 renderStats();
+renderInsights(); 
