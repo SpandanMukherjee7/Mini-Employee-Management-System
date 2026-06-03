@@ -42,7 +42,7 @@ function addEmployee(name, email, department, salary, status) {
   };
   nextId++;
   employees.push(newEmp);
-  saveEmployees(employees);
+  saveOneEmployee(newEmp);
 }
 
 function updateEmployee(id, name, email, department, salary, status) {
@@ -59,14 +59,16 @@ function updateEmployee(id, name, email, department, salary, status) {
     }
     return emp;
   });
-  saveEmployees(employees);
+  var updated = employees.find(function(e) { return e.id === id; });
+  saveOneEmployee(updated);
 }
 
 function deleteEmployee(id) {
   employees = employees.filter(function (emp) {
     return emp.id !== id;
   });
-  saveEmployees(employees);
+  /* saveEmployees(employees); */
+  removeOneEmployee(id);
 }
 
 function searchEmployees(query) {
