@@ -1,5 +1,7 @@
 var editingId = null;
 var deleteTargetId = null;
+var currentPage = 1;
+var PAGE_SIZE = 10;
 
 var searchInput    = document.getElementById("searchInput");
 var deptFilter     = document.getElementById("deptFilter");
@@ -11,13 +13,11 @@ var addBtn         = document.getElementById("addBtn");
 var closeModalBtn  = document.getElementById("closeModal");
 var cancelBtn      = document.getElementById("cancelBtn");
 
-// confirm delete modal
 var confirmModal  = document.getElementById("confirmModal");
 var confirmText   = document.getElementById("confirmText");
 var confirmOk     = document.getElementById("confirmOk");
 var confirmCancel = document.getElementById("confirmCancel");
 
-// form fields
 var fieldName   = document.getElementById("fieldName");
 var fieldEmail  = document.getElementById("fieldEmail");
 var fieldDept   = document.getElementById("fieldDept");
@@ -36,14 +36,22 @@ function renderTable() {
     });
   }
 
+  var totalPages = Math.ceil(list.length / PAGE_SIZE);
+  if (currentPage > totalPages) currentPage = 1;
+
+  var start    = (currentPage - 1) * PAGE_SIZE;
+  var end      = start + PAGE_SIZE;
+  var pageList = list.slice(start, end);
+
   tableBody.innerHTML = "";
 
   if (list.length === 0) {
     tableBody.innerHTML = "<tr><td colspan='7' style='text-align:center;'>No employees found</td></tr>";
+    renderPagination(0, 0);
     return;
   }
 
-  list.forEach(function (emp) {
+  pageList.forEach(function (emp) {
     var tr = document.createElement("tr");
     tr.innerHTML =
       "<td>" + emp.id + "</td>" +
@@ -58,6 +66,48 @@ function renderTable() {
       "</td>";
     tableBody.appendChild(tr);
   });
+
+  renderPagination(totalPages, list.length);
+}
+
+function renderPagination(totalPages, totalItems) {
+  var container = document.getElementById("pagination");
+  container.innerHTML = "";
+
+  if (totalPages <= 1) return;
+
+  var prev = document.createElement("button");
+  prev.textContent = "←";
+  prev.className = "page-btn";
+  prev.disabled = currentPage === 1;
+  prev.addEventListener("click", function () {
+    currentPage--;
+    renderTable();
+  });
+  container.appendChild(prev);
+
+  for (var i = 1; i <= totalPages; i++) {
+    (function (i) {
+      var btn = document.createElement("button");
+      btn.textContent = i;
+      btn.className = "page-btn" + (i === currentPage ? " page-active" : "");
+      btn.addEventListener("click", function () {
+        currentPage = i;
+        renderTable();
+      });
+      container.appendChild(btn);
+    })(i);
+  }
+
+  var next = document.createElement("button");
+  next.textContent = "→";
+  next.className = "page-btn";
+  next.disabled = currentPage === totalPages;
+  next.addEventListener("click", function () {
+    currentPage++;
+    renderTable();
+  });
+  container.appendChild(next);
 }
 
 function renderStats() {
@@ -102,7 +152,6 @@ function handleDelete(id) {
   confirmModal.style.display = "flex";
 }
 
-// confirm delete — yes button
 confirmOk.addEventListener("click", function () {
   if (deleteTargetId !== null) {
     deleteEmployee(deleteTargetId);
@@ -113,13 +162,11 @@ confirmOk.addEventListener("click", function () {
   }
 });
 
-// confirm delete — cancel button
 confirmCancel.addEventListener("click", function () {
   deleteTargetId = null;
   confirmModal.style.display = "none";
 });
 
-// close confirm modal on overlay click
 confirmModal.addEventListener("click", function (e) {
   if (e.target === confirmModal) {
     deleteTargetId = null;
@@ -127,7 +174,6 @@ confirmModal.addEventListener("click", function (e) {
   }
 });
 
-// form submit
 empForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -151,39 +197,34 @@ empForm.addEventListener("submit", function (e) {
   renderStats();
 });
 
-// search
 searchInput.addEventListener("input", function () {
+  currentPage = 1;
   renderTable();
 });
 
-// filter
 deptFilter.addEventListener("change", function () {
+  currentPage = 1;
   renderTable();
 });
 
-// open modal
 addBtn.addEventListener("click", function () {
   openAddModal();
 });
 
-// close modal
 closeModalBtn.addEventListener("click", closeModal);
 cancelBtn.addEventListener("click", closeModal);
 
-// close on overlay click
 modal.addEventListener("click", function (e) {
   if (e.target === modal) {
     closeModal();
   }
 });
 
-// dark mode toggle
 document.getElementById("darkToggle").addEventListener("click", function () {
   document.body.classList.toggle("dark");
   var isDark = document.body.classList.contains("dark");
   this.textContent = isDark ? "Light Mode" : "Dark Mode";
 });
 
-// init
 renderTable();
 renderStats();

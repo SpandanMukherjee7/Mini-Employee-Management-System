@@ -380,3 +380,49 @@ body.dark .btn-cancel {
 body.dark footer {
   color: #555;
 }
+
+
+#pagination {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  min-width: 36px;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #2c3e50;
+  color: white;
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-active {
+  background: #2c3e50;
+  color: white;
+  border-color: #2c3e50;
+}
+
+/* dark mode */
+body.dark .page-btn {
+  background: #16213e;
+  color: #e0e0e0;
+  border-color: #2a2a4a;
+}
+
+body.dark .page-active {
+  background: #0f3460;
+  border-color: #0f3460;
+}
