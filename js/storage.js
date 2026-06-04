@@ -1,3 +1,15 @@
+function saveEmployees(employees) {
+  localStorage.setItem("employees", JSON.stringify(employees));
+}
+
+function loadEmployees() {
+  var data = localStorage.getItem("employees");
+  return data ? JSON.parse(data) : [];
+}
+
+
+
+/*
 var INDEX_KEY = "emp_index";
 
 function saveEmployees(employees) {
@@ -34,3 +46,5 @@ function removeOneEmployee(id) {
   index = index.filter(function (i) { return i !== id; });
   localStorage.setItem(INDEX_KEY, JSON.stringify(index));
 }
+
+*/

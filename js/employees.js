@@ -43,7 +43,7 @@ function addEmployee(name, email, department, salary, status) {
   console.log(nextId);
   nextId++;
   employees.push(newEmp);
-  saveOneEmployee(newEmp);
+  saveEmployees(employees);
 }
 
 function updateEmployee(id, name, email, department, salary, status) {
@@ -60,16 +60,15 @@ function updateEmployee(id, name, email, department, salary, status) {
     }
     return emp;
   });
-  var updated = employees.find(function(e) { return e.id === id; });
-  saveOneEmployee(updated);
+   saveEmployees(employees);
 }
 
 function deleteEmployee(id) {
   employees = employees.filter(function (emp) {
     return emp.id !== id;
   });
-  /* saveEmployees(employees); */
-  removeOneEmployee(id);
+  saveEmployees(employees); 
+  
 }
 
 function searchEmployees(query) {
