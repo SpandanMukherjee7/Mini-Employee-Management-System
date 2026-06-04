@@ -255,7 +255,15 @@ document.getElementById("darkToggle").addEventListener("click", function () {
   document.body.classList.toggle("dark");
   var isDark = document.body.classList.contains("dark");
   this.textContent = isDark ? "Light Mode" : "Dark Mode";
+  localStorage.setItem("theme", isDark ? "dark" : "light"); 
 });
+
+
+var saved = localStorage.getItem("theme");
+if (saved === "dark") {
+  document.body.classList.add("dark");
+  document.getElementById("darkToggle").textContent = "Light Mode";
+}
 
 renderTable();
 renderStats();

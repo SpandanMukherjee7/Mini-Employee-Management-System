@@ -97,11 +97,13 @@ main {
   padding: 9px 18px;
   border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
   font-size: 14px;
 }
 
 .btn-primary:hover {
-  background-color: #1a252f;
+  background-color: #18edbf;
+  color: black;
 }
 
 /* TABLE */
@@ -486,4 +488,4 @@ body.dark .insight-value {
   color: #e0e0e0;
 }
 
-/* responsive */
+
